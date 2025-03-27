@@ -28,7 +28,8 @@ public class LoginFragment extends Fragment {
     private EditText etUsername, etPassword;
     private FirebaseServices fbs;
     private TextView tvSignupLinkLogin;
-
+    private TextView tvForgotPasswordLogin;
+    private TextView tvAddMealLinkLogin;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -94,6 +95,25 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        tvForgotPasswordLogin = getView().findViewById(R.id.tvForgotPasswordLogin);
+        tvForgotPasswordLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoForgotPasswordFragment();
+            }
+
+        });
+
+        tvAddMealLinkLogin = getView().findViewById(R.id.tvAddMealLinkLogin);
+        tvAddMealLinkLogin.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                gotoAddMealPrepFragment();
+            }
+
+        });
+
         Button btnLogin = getView().findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener()
 
@@ -140,5 +160,23 @@ public class LoginFragment extends Fragment {
             ft.commit();
             ft.addToBackStack(null);
    }
+
+
+    private void gotoForgotPasswordFragment() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayoutMain, new ForgotPasswordFragment());
+        ft.commit();
+        ft.addToBackStack(null);
+
+    }
+
+    private void gotoAddMealPrepFragment() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayoutMain, new AddMealPrepFragment());
+        ft.commit();
+        ft.addToBackStack(null);
+    }
+
+
 }
 
