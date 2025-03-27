@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "474716428892",
+    "project_id": "mealprep-caf62",
+    "storage_bucket": "mealprep-caf62.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474716428892:android:1acb248cd1b0af315b6499",
+        "android_client_info": {
+          "package_name": "com.example.mealprep"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6qt-82OS-_lN-AYPRzUHe9TnAPr3b_Nc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
