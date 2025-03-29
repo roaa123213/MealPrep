@@ -1,6 +1,8 @@
 package com.example.mealprep;
 
-public class MealPrep {
+import java.io.Serializable;
+
+public class MealPrep implements Serializable {
 
     private String name ;
     private String calories;

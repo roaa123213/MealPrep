@@ -18,11 +18,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     Context context;
     ArrayList<MealPrep> mealList;
     private FirebaseServices fbs;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(MealPrep meal); // Pass the clicked Medicine object
+    }
+
 
     public MyAdapter(Context context, ArrayList<MealPrep> mealList) {
         this.context = context;
         this.mealList = mealList;
         this.fbs = FirebaseServices.getInstance();
+        this.listener = listener;
     }
 
 
@@ -54,6 +61,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         } else {
             holder.ivMealPhoto.setImageResource(R.drawable.default_image); // Default image
         }
+        // Set click listener on the item view
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(meal); // Notify listener with the clicked MealPrep
+            }
+        });
 
     }
 
