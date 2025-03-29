@@ -73,5 +73,15 @@
             android:text="Add MealPrep"
             app:layout_constraintEnd_toEndOf="@+id/tvForgotPasswordLogin"
             app:layout_constraintTop_toBottomOf="@+id/tvForgotPasswordLogin" />
+
+        <TextView
+            android:id="@+id/tvAllMealsFromLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginBottom="72dp"
+            android:text="All Meals"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvAddMealLinkLogin" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

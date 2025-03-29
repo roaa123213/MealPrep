@@ -31,6 +31,8 @@ public class LoginFragment extends Fragment {
     private TextView tvForgotPasswordLogin;
     private TextView tvAddMealLinkLogin;
 
+    private TextView tvAllMealsFromLogin;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -114,6 +116,16 @@ public class LoginFragment extends Fragment {
 
         });
 
+        tvAllMealsFromLogin = getView().findViewById(R.id.tvAllMealsFromLogin);
+        tvAllMealsFromLogin.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                gotoAllMealsFragment();
+            }
+
+        });
+
         Button btnLogin = getView().findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener()
 
@@ -173,6 +185,13 @@ public class LoginFragment extends Fragment {
     private void gotoAddMealPrepFragment() {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frameLayoutMain, new AddMealPrepFragment());
+        ft.commit();
+        ft.addToBackStack(null);
+    }
+
+    private void gotoAllMealsFragment() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayoutMain, new AllMealsFragment());
         ft.commit();
         ft.addToBackStack(null);
     }

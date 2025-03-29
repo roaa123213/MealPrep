@@ -11,8 +11,10 @@ googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.2.0"
 firebaseFirestore = "25.1.3"
 firebaseStorage = "21.0.1"
+picasso = "2.8"
 
 [libraries]
+picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "picasso" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

@@ -111,7 +111,7 @@ public class AddMealPrepFragment extends Fragment {
 
     @Override
     public void onStart() {
-        Log.d("AddMedicineFragment", "onStart");
+        Log.d("AddMealPrepFragment", "onStart");
         super.onStart();
         utils = Utils.getInstance();
         fbs = FirebaseServices.getInstance();
