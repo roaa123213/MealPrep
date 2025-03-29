@@ -54,7 +54,7 @@ public class AllMealsFragment extends Fragment implements MyAdapter.OnItemClickL
 
         fbs = FirebaseServices.getInstance();
         meals = new ArrayList<>();
-        adapter = new MyAdapter(getActivity(), meals);
+        adapter = new MyAdapter(getActivity(), meals,this);
         rvMeals.setAdapter(adapter);
         rvMeals.setHasFixedSize(true);
         rvMeals.setLayoutManager(new LinearLayoutManager(getActivity()));

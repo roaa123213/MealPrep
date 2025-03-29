@@ -25,7 +25,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
 
-    public MyAdapter(Context context, ArrayList<MealPrep> mealList) {
+    public MyAdapter(Context context, ArrayList<MealPrep> mealList,OnItemClickListener listener) {
         this.context = context;
         this.mealList = mealList;
         this.fbs = FirebaseServices.getInstance();
