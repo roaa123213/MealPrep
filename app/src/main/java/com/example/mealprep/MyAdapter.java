@@ -20,12 +20,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private FirebaseServices fbs;
     private OnItemClickListener listener;
 
+
     public interface OnItemClickListener {
         void onItemClick(MealPrep meal); // Pass the clicked Medicine object
     }
 
 
-    public MyAdapter(Context context, ArrayList<MealPrep> mealList,OnItemClickListener listener) {
+    public MyAdapter(Context context, ArrayList<MealPrep> mealList, OnItemClickListener listener) {
         this.context = context;
         this.mealList = mealList;
         this.fbs = FirebaseServices.getInstance();
@@ -35,9 +36,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @NonNull
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View v= LayoutInflater.from(context).inflate(R.layout.meal_item ,parent,false);
-        return  new MyAdapter.MyViewHolder(v);
+    public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.meal_item, parent, false);
+        return new MyAdapter.MyViewHolder(v);
     }
 
 
@@ -71,11 +72,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return mealList.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
         TextView tvCalories;
         TextView tvIngredients;
@@ -84,13 +85,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName=itemView.findViewById(R.id.tvNameAddMeal);
-            tvCalories=itemView.findViewById(R.id.tvCaloriesAddMeal);
-            tvIngredients=itemView.findViewById(R.id.tvIngredientsAddMeal);
-            tvPrepTime=itemView.findViewById(R.id.tvPrepTimeAddMeal);
+            tvName = itemView.findViewById(R.id.tvNameAddMeal);
+            tvCalories = itemView.findViewById(R.id.tvCaloriesAddMeal);
+            tvIngredients = itemView.findViewById(R.id.tvIngredientsAddMeal);
+            tvPrepTime = itemView.findViewById(R.id.tvPrepTimeAddMeal);
             ivMealPhoto = itemView.findViewById(R.id.imageView2);
 
 
         }
+
     }
 }

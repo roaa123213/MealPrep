@@ -1,24 +1,30 @@
 package com.example.mealprep;
 
+
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.mealprep.R;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.UUID;
+
 
 public class Utils {
 
     private static Utils instance;
 
     private FirebaseServices fbs;
-    private String imageStr;
+    /*private String imageStr;*/
 
     public Utils()
     {
@@ -63,6 +69,7 @@ public class Utils {
         UploadTask uploadTask = imageRef.putFile(selectedImageUri);
         uploadTask.addOnSuccessListener(taskSnapshot -> {
             imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                Log.d("Utils: uploadImage", "Download URL: " + uri.toString());
                 fbs.setSelectedImageURL(uri.toString());
                 callback.onUploadSuccess(uri);
             }).addOnFailureListener(e -> {
@@ -73,6 +80,19 @@ public class Utils {
             Log.e("Utils: uploadImage", "Failed to upload image: " + e.getMessage());
             callback.onUploadFailure();
         });
+    }
+
+    public void loadImageIntoImageView(ImageView imageView, String imageUrl, Context context) {
+        if (imageUrl == null || imageUrl.isEmpty()) {
+            Toast.makeText(context, "Image URL is empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Picasso.get()
+                .load(imageUrl)
+                .placeholder(R.drawable.placeholder_image) // Placeholder image while loading
+                .error(R.drawable.error_image) // Error image if loading fails
+                .into(imageView);
     }
 
     public interface ImageUploadCallback {

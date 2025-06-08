@@ -41,4 +41,11 @@
         android:layout_height="wrap_content"
         android:text="PrepTime"
         android:layout_marginTop="4dp" />
+
+    <Button
+        android:id="@+id/btnEditMeal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Meal" />
+
 </LinearLayout>

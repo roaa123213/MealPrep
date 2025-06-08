@@ -4,11 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.fragment.app.Fragment;
-
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.fragment.app.Fragment;
+
+import com.example.mealprep.FirebaseServices;
+import com.example.mealprep.MealPrep;
+import com.example.mealprep.Utils;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,12 +44,10 @@ public class AddMealPrepFragment extends Fragment {
     private Utils utils;
     private ActivityResultLauncher<Intent> galleryLauncher;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // TODO: Rename parameter arguments if needed
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -59,7 +63,6 @@ public class AddMealPrepFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment AddMealPrepFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static AddMealPrepFragment newInstance(String param1, String param2) {
         AddMealPrepFragment fragment = new AddMealPrepFragment();
         Bundle args = new Bundle();
@@ -72,10 +75,12 @@ public class AddMealPrepFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("AddMealPrepFragment", "onCreate");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
         galleryLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -89,46 +94,60 @@ public class AddMealPrepFragment extends Fragment {
                             public void onUploadSuccess(Uri downloadUrl) {
                                 fbs.setSelectedImageURL(downloadUrl.toString());
                                 Toast.makeText(requireActivity(), "Image uploaded successfully", Toast.LENGTH_SHORT).show();
+                                selectedImageUri = null;
                             }
 
                             @Override
                             public void onUploadFailure() {
                                 Toast.makeText(requireActivity(), "Failed to upload image", Toast.LENGTH_SHORT).show();
+                                selectedImageUri = null;
                             }
                         });
+                    } else {
+                        selectedImageUri = null;
                     }
                 }
         );
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_meal_prep, container, false);
+        Log.d("AddMealPrepFragment", "onCreateView");
+        View view = inflater.inflate(R.layout.fragment_add_meal_prep, container, false);
+
+        // Optional: Add back arrow navigation
+        ImageView ivBackArrow = view.findViewById(R.id.ivBackArrowAddMeal); // Add this in your XML
+        if (ivBackArrow != null) {
+            ivBackArrow.setOnClickListener(v -> {
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.frameLayoutMain, new LoginFragment()) // Replace with your home fragment
+                        .addToBackStack(null)
+                        .commit();
+            });
+        }
+
+        return view;
     }
 
     @Override
     public void onStart() {
-        Log.d("AddMealPrepFragment", "onStart");
         super.onStart();
+        Log.d("AddMealPrepFragment", "onStart");
+
         utils = Utils.getInstance();
         fbs = FirebaseServices.getInstance();
 
         // Initialize all view components here
-        etName = getView().findViewById(R.id.etNameAddMeal);
-        etCalories = getView().findViewById(R.id.etCaloriesAddMeal);
-        etPrepTime= getView().findViewById(R.id.etPrepTimeAddMeal);
-        etIngredients = getView().findViewById(R.id.etIngredientsAddMeal);
-        btnAddMeal = getView().findViewById(R.id.btnAddMeal);
-        img = getView().findViewById(R.id.imageView);
+        etName = requireView().findViewById(R.id.etNameAddMeal);
+        etCalories = requireView().findViewById(R.id.etCaloriesAddMeal);
+        etPrepTime = requireView().findViewById(R.id.etPrepTimeAddMeal);
+        etIngredients = requireView().findViewById(R.id.etIngredientsAddMeal);
+        btnAddMeal = requireView().findViewById(R.id.btnAddMeal);
+        img = requireView().findViewById(R.id.imageView);
 
         btnAddMeal.setOnClickListener(v -> addMealPrep());
         img.setOnClickListener(v -> openGallery());
-
-
-
     }
 
     private void addMealPrep() {
@@ -137,22 +156,71 @@ public class AddMealPrepFragment extends Fragment {
         String prepTimeString = etPrepTime.getText().toString().trim();
         String ingredientsString = etIngredients.getText().toString().trim();
 
-        // Validate input
-        if (nameString.isEmpty() || caloriesString.isEmpty() || prepTimeString.isEmpty() || ingredientsString.isEmpty() || selectedImageUri == null) {
-            utils.showMessageDialog(requireActivity(), "Some fields are empty or invalid");
+        // Validate inputs
+        if (nameString.isEmpty() || caloriesString.isEmpty() || prepTimeString.isEmpty() || ingredientsString.isEmpty()) {
+            utils.showMessageDialog(requireActivity(), "All fields and image are required.");
             return;
         }
 
-        MealPrep mealPrep;
-        if (fbs.getSelectedImageURL() == null) {
-            mealPrep = new MealPrep(nameString, caloriesString, prepTimeString, ingredientsString, "");
-        } else {
-            mealPrep = new MealPrep(nameString, caloriesString, prepTimeString, ingredientsString, fbs.getSelectedImageURL());
+        // Validate image selection
+        if (selectedImageUri == null && (fbs.getSelectedImageURL() == null || fbs.getSelectedImageURL().isEmpty())) {
+            utils.showMessageDialog(requireActivity(), "Please select an image");
+            return;
         }
 
-        fbs.getFire().collection("meals").add(mealPrep)
-                .addOnSuccessListener(documentReference -> Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(requireActivity(), "Failure", Toast.LENGTH_SHORT).show());
+        MealPrep meal = new MealPrep(
+                nameString,
+                caloriesString,
+                prepTimeString,
+                ingredientsString,
+                fbs.getSelectedImageURL()
+        );
+
+        // Save medicine details to Firestore under the current user's collection
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String userId = mAuth.getCurrentUser().getUid();
+        CollectionReference mealsRef = db.collection("users")
+                .document(userId)
+                .collection("meals");
+
+        mealsRef.add(meal)
+                .addOnSuccessListener(documentReference -> {
+                    String mealId = documentReference.getId();
+                    meal.setId(mealId);
+
+                    // Update the Firestore document with the medicine ID
+                    documentReference.update("id", mealId)
+                            .addOnSuccessListener(aVoid -> {
+                                Log.d("AddMealFragment", "Meal added successfully");
+
+                                // Reset the ImageView, selectedImageUri, and fbs.setSelectedImageURL()
+                                img.setImageDrawable(null);
+                                selectedImageUri = null;
+                                fbs.setSelectedImageURL(null);
+
+                                Toast.makeText(requireActivity(), "Meal added successfully!", Toast.LENGTH_SHORT).show();
+
+                            })
+                            .addOnFailureListener(e -> {
+                                Log.e("AddMealFragment", "Failed to update meal ID: " + e.getMessage());
+                                Toast.makeText(requireActivity(), "Failed to update meal ID: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("AddMealFragment", "Failed to add medicine: " + e.getMessage());
+                    Toast.makeText(requireActivity(), "Failed to add medicine: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void resetForm() {
+        etName.getText().clear();
+        etCalories.getText().clear();
+        etPrepTime.getText().clear();
+        etIngredients.getText().clear();
+        img.setImageResource(android.R.drawable.ic_menu_gallery);
+        selectedImageUri = null;
+        fbs.setSelectedImageURL(null);
     }
 
     private void openGallery() {

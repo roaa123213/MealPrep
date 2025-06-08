@@ -3,10 +3,12 @@ package com.example.mealprep;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
@@ -18,7 +20,7 @@ import com.squareup.picasso.Picasso;
 public class MealPrepDetailFragment extends Fragment {
 
     private MealPrep meal;
-
+    private Button btn;
 
 
     public MealPrepDetailFragment() {
@@ -63,6 +65,15 @@ public class MealPrepDetailFragment extends Fragment {
         TextView tvPrepTime = view.findViewById(R.id.tvDetailPrepTime);
         ImageView ivPhoto = view.findViewById(R.id.ivDetailPhoto);
 
+        btn = getView().findViewById(R.id.btnEditMeal);
+        btn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                gotoEditMeal();
+            }
+        });
+
         // Bind data to views
         if (meal != null) {
             tvName.setText(meal.getName());
@@ -84,5 +95,12 @@ public class MealPrepDetailFragment extends Fragment {
 
         return view;
 
+    }
+
+    private void gotoEditMeal() {
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayoutMain, new EditMealFragment());
+        ft.commit();
+        ft.addToBackStack(null);
     }
 }

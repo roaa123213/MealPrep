@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class MealPrep implements Serializable {
 
+    private String id;
     private String name ;
     private String calories;
     private String prepTime;
@@ -24,6 +25,11 @@ public class MealPrep implements Serializable {
     }
 
 
+    public String getId(){return id;}
+
+    public void setId(String id){
+        this.id=id;
+    }
     public String getPhoto() {
         return photo;
     }
