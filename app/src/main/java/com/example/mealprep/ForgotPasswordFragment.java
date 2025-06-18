@@ -116,7 +116,7 @@ public class ForgotPasswordFragment extends Fragment {
 
     private void gotoLoginFragment() {
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frameLayoutMain, new LoginFragment());
+        ft.replace(R.id.ivMealImage, new LoginFragment());
         ft.commit();
         ft.addToBackStack(null);
     }

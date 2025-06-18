@@ -85,14 +85,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tvNameAddMeal);
-            tvCalories = itemView.findViewById(R.id.tvCaloriesAddMeal);
-            tvIngredients = itemView.findViewById(R.id.tvIngredientsAddMeal);
-            tvPrepTime = itemView.findViewById(R.id.tvPrepTimeAddMeal);
-            ivMealPhoto = itemView.findViewById(R.id.imageView2);
-
-
+            tvName = itemView.findViewById(R.id.etNameAddMealPrep);
+            tvCalories = itemView.findViewById(R.id.etCaloriesEditMeal);
+            tvIngredients = itemView.findViewById(R.id.etIngredientsEditMeal);
+            tvPrepTime = itemView.findViewById(R.id.etPrepTimeEditMeal);
+            ivMealPhoto = itemView.findViewById(R.id.imageView);
+      
+            
         }
 
+        
     }
 }

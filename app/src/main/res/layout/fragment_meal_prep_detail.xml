@@ -1,51 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:background="#F5F5F5">
 
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvDetailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:text="Meal Name"/>
+
+    <!-- Image View -->
     <ImageView
         android:id="@+id/ivDetailPhoto"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        />
+        android:src="@drawable/default_image"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="Meal Photo"/>
 
-    <TextView
-        android:id="@+id/tvDetailName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Meal Name"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp" />
-
+    <!-- Calories -->
     <TextView
         android:id="@+id/tvDetailCalories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calories"
-        android:layout_marginTop="4dp" />
-    <TextView
-        android:id="@+id/tvDetailIngredients"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingredients"
-        android:layout_marginTop="4dp" />
+        android:text="Calories: 300"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="12dp"/>
 
+    <!-- Prep Time -->
     <TextView
         android:id="@+id/tvDetailPrepTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PrepTime"
-        android:layout_marginTop="4dp" />
+        android:text="Preparation Time: 30 min"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="12dp"/>
 
+    <!-- Ingredients -->
+    <TextView
+        android:id="@+id/tvDetailIngredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ingredients: Rice, Chicken, Vegetables"
+        android:textSize="16sp"
+        android:textColor="#555555"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Edit Button -->
     <Button
         android:id="@+id/btnEditMeal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Meal" />
+        android:text="Edit Meal"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:backgroundTint="#6200EE"
+        android:padding="12dp"
+        android:layout_marginTop="32dp"/>
 
 </LinearLayout>

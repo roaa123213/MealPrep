@@ -95,7 +95,7 @@ public class AllMealsFragment extends Fragment implements MyAdapter.OnItemClickL
 
         // Use Fragment Transactions to replace the current fragment
         getParentFragmentManager().beginTransaction()
-                .replace(R.id.frameLayoutMain, detailFragment) // Replace with your container ID
+                .replace(R.id.ivMealImage, detailFragment) // Replace with your container ID
                 .addToBackStack(null) // Add to back stack so users can return
                 .commit();
     }

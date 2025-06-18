@@ -1,145 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#F5F5F5">
+    tools:context=".EditMealFragment">
 
-    <!-- Back Arrow -->
-    <ImageView
-        android:id="@+id/ivBackArrowEditMed"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="Back to Previous Screen"
-        android:src="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F5F5"
+        android:padding="16dp">
 
-    <!-- Title Section -->
-    <LinearLayout
-        android:id="@+id/titleContainerEdit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivBackArrowEditMed"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp">
-
-        <!-- Title Text -->
-        <TextView
-            android:id="@+id/tvTitleEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update Your Meal"
-
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="8dp" />
-
-        <!-- Medicine Icon -->
+        <!-- Back Arrow -->
         <ImageView
-            android:id="@+id/ivMealIconEdit"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_meal_icon"
-            android:contentDescription="Meal Icon"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="16dp" />
-    </LinearLayout>
+            android:id="@+id/ivBackArrowEditMed"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Go back"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Expiration Date -->
-    <EditText
-        android:id="@+id/etNameEditMeal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        <!-- Title Section -->
+        <LinearLayout
+            android:id="@+id/titleContainerEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toEndOf="@id/ivBackArrowEditMed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        android:hint="Meal Name"
-        android:inputType="text"
-        android:padding="12dp"
+            <!-- Meal Icon -->
+            <ImageView
+                android:id="@+id/ivMealIconEdit"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_meal_icon"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Meal Icon"/>
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleContainerEdit" />
+            <!-- Title Text -->
+            <TextView
+                android:id="@+id/tvTitleEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Your Meal"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#FF333333"/>
+        </LinearLayout>
 
-    <EditText
-        android:id="@+id/etCaloriesEditMeal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Calories"
-        android:inputType="text"
+        <!-- Meal Name Input -->
+        <EditText
+            android:id="@+id/etNameEditMeal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:hint="Meal Name"
+            android:inputType="textCapWords"
+            android:padding="12dp"
+            android:background="#FFFFFF"
+            android:textColor="#000000"
+            android:textColorHint="#999999"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleContainerEdit" />
 
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etNameEditMeal"
-        android:layout_marginTop="16dp" />
+        <!-- Calories Input -->
+        <EditText
+            android:id="@+id/etCaloriesEditMeal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Calories"
+            android:inputType="number"
+            android:padding="12dp"
+            android:background="#FFFFFF"
+            android:textColor="#000000"
+            android:textColorHint="#999999"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etNameEditMeal" />
 
-    <!-- Meal Time -->
-    <EditText
-        android:id="@+id/etPrepTimeEditMeal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        <!-- Preparation Time Input -->
+        <EditText
+            android:id="@+id/etPrepTimeEditMeal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Preparation Time"
+            android:inputType="time"
+            android:padding="12dp"
+            android:background="#FFFFFF"
+            android:textColor="#000000"
+            android:textColorHint="#999999"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etCaloriesEditMeal" />
 
-        android:inputType="time"
+        <!-- Ingredients Input -->
+        <EditText
+            android:id="@+id/etIngredientsEditMeal"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp"
+            android:hint="Ingredients"
+            android:inputType="textMultiLine"
+            android:minLines="4"
+            android:gravity="top|start"
+            android:padding="12dp"
+            android:background="#FFFFFF"
+            android:textColor="#000000"
+            android:textColorHint="#999999"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etPrepTimeEditMeal" />
 
-        android:hint="Prepration Time"
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etCaloriesEditMeal"
-        android:layout_marginTop="16dp" />
+        <!-- Image Upload -->
+        <ImageView
+            android:id="@+id/imageViewEdit"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_image"
+            android:contentDescription="Meal Image"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etIngredientsEditMeal"
+            android:layout_marginTop="16dp" />
 
-    <!-- Quantity -->
-    <EditText
-        android:id="@+id/etIngredientsEditMeal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Ingredients"
-        android:inputType="number"
+        <!-- Update Button -->
+        <Button
+            android:id="@+id/btnSaveMeal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:backgroundTint="#6200EE"
+            android:padding="12dp"
+            android:text="Update Meal"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewEdit" />
 
-
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etPrepTimeEditMeal"
-        android:layout_marginTop="16dp" />
-
-    <!-- Image Upload -->
-    <ImageView
-        android:id="@+id/imageViewEdit"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/placeholder_image"
-        android:contentDescription="Meal Image"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etIngredientsEditMeal"
-        android:layout_marginTop="16dp" />
-
-    <!-- Update Button -->
-    <Button
-        android:id="@+id/btnSaveMeal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Update Meal"
-        android:textAllCaps="false"
-
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewEdit"
-        android:layout_marginTop="16dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
