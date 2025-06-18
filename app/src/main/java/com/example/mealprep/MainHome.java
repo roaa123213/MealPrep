@@ -25,8 +25,8 @@ public class MainHome extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button btnAddMeal = view.findViewById(R.id.btnAddMealPrep);
-        Button btnAllMeals = view.findViewById(R.id.btnAllMealsFromHome);
+        Button btnAddMeal = view.findViewById(R.id.btnAddMealMainHome);
+        Button btnAllMeals = view.findViewById(R.id.btnAddMealMainHome);
         
         btnAddMeal.setOnClickListener(v -> {
             getParentFragmentManager().beginTransaction()

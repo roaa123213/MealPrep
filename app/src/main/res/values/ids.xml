@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="frameLayoutMain" type="id">frameLayoutMain</item>
+    <item name="frameLayoutMain" type="id"/>
 </resources>

@@ -20,7 +20,7 @@
 
     <!-- Add New Meal Button -->
     <Button
-        android:id="@+id/btnAddMealFromHome"
+        android:id="@+id/btnAddMealMainHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add New Meal"
@@ -32,7 +32,7 @@
 
     <!-- View All Meals Button -->
     <Button
-        android:id="@+id/btnAllMealsFromHome"
+        android:id="@+id/btnAllMealsMainHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View All Meals"

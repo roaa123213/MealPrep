@@ -117,7 +117,7 @@ public class LoginFragment extends Fragment {
         });
         
 
-        tvAllMealsFromLogin = getView().findViewById(R.id.btnAllMealsFromHome);
+        tvAllMealsFromLogin = getView().findViewById(R.id.btnLogin);
         tvAllMealsFromLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
